@@ -1,6 +1,4 @@
-import { join } from 'path'
 import {
-  generateFromTemplateFile,
   commonConfigExisted,
   configInPackageJSON,
   updatePkg
@@ -13,8 +11,7 @@ const StylelintGenerator: ConfigGenerator = {
     front: true,
     full: true
   },
-  desc:
-    'A mighty, modern linter that helps you avoid errors and enforce conventions in your styles',
+  desc: 'A mighty, modern linter that helps you avoid errors and enforce conventions in your styles',
   refUrl: 'https://stylelint.io/user-guide/configure',
   file: '.stylelintrc.js',
   devDependencies: ['stylelint', '@doremijs/stylelint-config'],
