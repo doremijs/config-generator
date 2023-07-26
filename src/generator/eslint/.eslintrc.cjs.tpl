@@ -131,5 +131,5 @@ module.exports = {
       rules: { 'jest/prefer-expect-assertions': 'off' }
     }<% } %>
   ],
-  ignorePatterns: ['dist', 'node_modules', '**/{public,lib,libs}/**/*.js']
+  ignorePatterns: ['dist', 'node_modules', '.eslintrc.js', '**/{public,lib,libs}/**/*.js']
 }
