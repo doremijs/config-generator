@@ -1,7 +1,7 @@
 import { execSync } from 'child_process'
 import prompts = require('prompts')
 import { log } from './utils'
-import { TemplateKyes } from './generator/interface'
+import { TemplateKeys } from './generator/interface'
 import { isVersionUpdated } from './utils'
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -42,7 +42,7 @@ export default async function prepareForArgs(
 ): Promise<
   | boolean
   | {
-      template: TemplateKyes
+      template: TemplateKeys
     }
 > {
   if (args.length) {
@@ -69,7 +69,7 @@ flags的值如下：
     if (['-t', '--template'].includes(args[0])) {
       if (['default', 'front', 'node', 'full'].includes(args[1])) {
         return {
-          template: args[1] as TemplateKyes
+          template: args[1] as TemplateKeys
         }
       }
       log('Template Error', '不支持的模板，使用默认模板')

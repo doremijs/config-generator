@@ -7,7 +7,7 @@ import runGenerator from './generator'
 import { AvailableConfigKeys, availableConfigs } from './generator/generators'
 import { log, sleep } from './utils'
 import prepareForArgs, { helpMessage, upgradeValid } from './args'
-import { TemplateKyes } from './generator/interface'
+import { TemplateKeys } from './generator/interface'
 
 export async function run(args: string[]) {
   // 命令行参数解析
@@ -32,7 +32,7 @@ export async function run(args: string[]) {
             value: _module,
             selected:
               availableConfigs[_module as AvailableConfigKeys].select?.[
-                (prepare as { template: TemplateKyes }).template ?? 'default'
+                (prepare as { template: TemplateKeys }).template ?? 'default'
               ]
           }
         })

@@ -14,20 +14,18 @@ module.exports = {
   },
   plugins: [
     'simple-import-sort',
-    // 'jsx-a11y',
     'n',
     'promise',
-    'import'
+    'import'<% if (react) { %>,
+    'react-refresh',
+    // 'jsx-a11y',<% } %>
   ],
   extends: [
-    'eslint:recommended',
-    <% if (jest) { %>
-    'plugin:prettier/recommended',<% } %>
-    // 'plugin:react/jsx-runtime'
-    // 'plugin:react/recommended',
-    // 'plugin:react-hooks/recommended',
-    // 'plugin:jsx-a11y/recommended',
-    // 'plugin:vue/vue3-recommended',
+    'eslint:recommended'<% if (jest) { %>,
+    'plugin:prettier/recommended',<% } %><% if (react) { %>,
+    'plugin:react-hooks/recommended'
+    // 'plugin:jsx-a11y/recommended'<% } %><% if (vue) { %>,
+    'plugin:vue/vue3-recommended'<% } %>
   ],
   rules: {
     'no-unused-vars': 'warn',
@@ -62,6 +60,13 @@ module.exports = {
 
     // https://www.npmjs.com/package/eslint-plugin-promise
     'promise/param-names': 'error',
+    <% if (react) { %>
+    // https://www.npmjs.com/package/eslint-plugin-react-refresh
+    'react-refresh/only-export-components': [
+      'warn',
+      { allowConstantExport: true },
+    ],
+    <% } %>
   },
   // settings: {
   //   react: {

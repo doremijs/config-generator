@@ -17,6 +17,8 @@ import ReadmeGenerator from './readme'
 import StylelintGenerator from './stylelint'
 import TypescriptGenerator from './typescript'
 import A2SGenerator from './a2s'
+import ReactGenerator from './react'
+import VueGenerator from './vue'
 
 export const availableConfigs = {
   babel: BabelGenerator,
@@ -34,6 +36,8 @@ export const availableConfigs = {
   npm: NpmGenerator,
   nvm: NvmGenerator,
   prettier: PrettierGenerator,
+  react: ReactGenerator,
+  vue: VueGenerator,
   readme: ReadmeGenerator,
   stylelint: StylelintGenerator,
   typescript: TypescriptGenerator,

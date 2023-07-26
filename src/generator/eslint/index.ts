@@ -31,16 +31,20 @@ const EslintGenerator: ConfigGenerator = {
       'eslint-plugin-promise',
       'eslint-plugin-unused-imports'
     ]
+    if (selectedConfigKeys.includes('react')) {
+      deps.push('eslint-plugin-react-hooks', 'eslint-plugin-react-refresh')
+    }
+    if (selectedConfigKeys.includes('vue')) {
+      deps.push('eslint-plugin-vue')
+    }
     if (selectedConfigKeys.includes('jest')) {
-      deps.push(...['eslint-plugin-jest'])
+      deps.push('eslint-plugin-jest')
     }
     if (selectedConfigKeys.includes('prettier')) {
-      deps.push(...['eslint-config-prettier', 'eslint-plugin-prettier'])
+      deps.push('eslint-config-prettier', 'eslint-plugin-prettier')
     }
     if (selectedConfigKeys.includes('typescript')) {
-      deps.push(
-        ...['@typescript-eslint/eslint-plugin', '@typescript-eslint/parser']
-      )
+      deps.push('@typescript-eslint/eslint-plugin', '@typescript-eslint/parser')
     }
     return deps
   },
@@ -59,11 +63,13 @@ const EslintGenerator: ConfigGenerator = {
   ): Promise<boolean> {
     return (
       (await generateFromTemplateFile(join(__dirname, '.eslintignore'))) &&
-      (await generateFromTemplateFile(join(__dirname, '.eslintrc.js.tpl'), {
+      (await generateFromTemplateFile(join(__dirname, '.eslintrc.cjs.tpl'), {
         interpolationValues: {
           prettier: selectedConfigKeys.includes('prettier'),
           typescript: selectedConfigKeys.includes('typescript'),
-          jest: selectedConfigKeys.includes('jest')
+          jest: selectedConfigKeys.includes('jest'),
+          react: selectedConfigKeys.includes('react'),
+          vue: selectedConfigKeys.includes('vue')
         }
       }))
     )

@@ -42,4 +42,4 @@ export interface Generator {
 
 export type ConfigGenerator = Readonly<Generator>
 
-export type TemplateKyes = keyof NonNullable<ConfigGenerator['select']>
+export type TemplateKeys = keyof NonNullable<ConfigGenerator['select']>
