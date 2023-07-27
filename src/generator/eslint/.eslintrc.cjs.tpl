@@ -18,13 +18,15 @@ module.exports = {
     'promise',
     'import'<% if (react) { %>,
     'react-refresh',
-    // 'jsx-a11y',<% } %>
+    'jsx-a11y'<% } %>
   ],
   extends: [
-    'eslint:recommended'<% if (jest) { %>,
-    'plugin:prettier/recommended',<% } %><% if (react) { %>,
+    'eslint:recommended'<% if (prettier) { %>,
+    'plugin:prettier/recommended'<% } %><% if (react) { %>,
+    'plugin:react/jsx-runtime',
+    'plugin:react/recommended',
     'plugin:react-hooks/recommended'
-    // 'plugin:jsx-a11y/recommended'<% } %><% if (vue) { %>,
+    'plugin:jsx-a11y/recommended'<% } %><% if (vue) { %>,
     'plugin:vue/vue3-recommended'<% } %>
   ],
   rules: {
@@ -61,20 +63,25 @@ module.exports = {
     // https://www.npmjs.com/package/eslint-plugin-promise
     'promise/param-names': 'error',
     <% if (react) { %>
+    // react
+    'react/prop-types': 'off',
+    'react/jsx-uses-react': 'off',
+    'react/react-in-jsx-scope': 'off',
+    'jsx-a11y/media-has-caption': 'off',
+    'jsx-a11y/anchor-is-valid': 'warn',
+    'jsx-a11y/click-events-have-key-events': 'off',
+    'jsx-a11y/no-static-element-interactions': 'off',
+
     // https://www.npmjs.com/package/eslint-plugin-react-refresh
-    'react-refresh/only-export-components': [
-      'warn',
-      { allowConstantExport: true },
-    ],
-    <% } %>
-  },
-  // settings: {
-  //   react: {
-  //     version: 'detect',
-  //   }
-  // },
+    'react-refresh/only-export-components': ['warn', { allowConstantExport: true }]<% } %>
+  },<% if (react) { %>
+  settings: {
+    react: {
+      version: 'detect',
+    }
+  },<% } %>
   overrides: [
-    <% if (jest) { %>{
+    <% if (typescript) { %>{
       files: ['**/*.ts?(x)'],
       parser: '@typescript-eslint/parser',
       parserOptions: {

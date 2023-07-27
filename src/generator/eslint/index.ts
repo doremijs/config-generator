@@ -32,7 +32,12 @@ const EslintGenerator: ConfigGenerator = {
       'eslint-plugin-unused-imports'
     ]
     if (selectedConfigKeys.includes('react')) {
-      deps.push('eslint-plugin-react-hooks', 'eslint-plugin-react-refresh')
+      deps.push(
+        'eslint-plugin-react',
+        'eslint-plugin-react-hooks',
+        'eslint-plugin-react-refresh',
+        'eslint-plugin-jsx-a11y'
+      )
     }
     if (selectedConfigKeys.includes('vue')) {
       deps.push('eslint-plugin-vue')
