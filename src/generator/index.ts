@@ -83,11 +83,7 @@ export default async function run(selectedConfigKeys: AvailableConfigKeys[]) {
     if (selectedConfigKeys.includes('prettier')) {
       lintScripts.push('npm run prettier')
     }
-    await updatePkg(
-      'global',
-      ['scripts', 'lint:all'],
-      selectedConfigKeys.join(' && ')
-    )
+    await updatePkg('global', ['scripts', 'lint:all'], lintScripts.join(' && '))
   }
   // 打印配置参考url表格
   console.log('\n')
