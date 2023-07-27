@@ -2,7 +2,8 @@ import { join } from 'path'
 import {
   generateFromTemplateFile,
   commonConfigExisted,
-  configInPackageJSON
+  configInPackageJSON,
+  updatePkg
 } from '../../utils'
 import { AvailableConfigKeys } from '../generators'
 import { ConfigGenerator } from '../interface'
@@ -76,7 +77,12 @@ const EslintGenerator: ConfigGenerator = {
           react: selectedConfigKeys.includes('react'),
           vue: selectedConfigKeys.includes('vue')
         }
-      }))
+      })) &&
+      (await updatePkg(
+        this.key,
+        ['scripts', 'eslint'],
+        'eslint . --ext js,jsx,ts,tsx,json --quiet --fix'
+      ))
     )
   }
 }

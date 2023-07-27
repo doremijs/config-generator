@@ -1,4 +1,10 @@
-import { colorful, getDepInstallCommand, log, runCommand } from '../utils'
+import {
+  colorful,
+  getDepInstallCommand,
+  log,
+  runCommand,
+  updatePkg
+} from '../utils'
 
 import { getPackageManager } from '../utils'
 import { availableConfigs, AvailableConfigKeys } from './generators'
@@ -60,6 +66,28 @@ export default async function run(selectedConfigKeys: AvailableConfigKeys[]) {
         )
       }
     }
+  }
+  // 添加lint:all命令
+  if (
+    selectedConfigKeys.some(key =>
+      ['eslint', 'prettier', 'stylelint'].includes(key)
+    )
+  ) {
+    const lintScripts = []
+    if (selectedConfigKeys.includes('eslint')) {
+      lintScripts.push('npm run eslint')
+    }
+    if (selectedConfigKeys.includes('stylelint')) {
+      lintScripts.push('npm run stylelint')
+    }
+    if (selectedConfigKeys.includes('prettier')) {
+      lintScripts.push('npm run prettier')
+    }
+    await updatePkg(
+      'global',
+      ['scripts', 'lint:all'],
+      selectedConfigKeys.join(' && ')
+    )
   }
   // 打印配置参考url表格
   console.log('\n')

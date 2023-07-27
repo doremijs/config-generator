@@ -31,6 +31,11 @@ const PrettierGenerator: ConfigGenerator = {
   async generateConfig(): Promise<boolean> {
     return (
       (await updatePkg(this.key, ['prettier'], '@doremijs/prettier-config')) &&
+      (await updatePkg(
+        this.key,
+        ['scripts', 'prettier'],
+        'prettier "*.!(js|jsx|ts|tsx|css|less|styl|scss|sass)" --write'
+      )) &&
       (await generateFromTemplateFile(join(__dirname, '.prettierignore')))
     )
   }

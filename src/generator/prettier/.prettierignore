@@ -31,3 +31,7 @@ public/
 
 # Ignore files
 .*ignore
+
+# Configuration files
+.browserslistrc
+.editorconfig
