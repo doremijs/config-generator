@@ -8,13 +8,14 @@
 
 ```bash
 # 全局安装
-npm i -g fe-conf
+npm i -g @doremijs/fe-conf
 # 或者
-yarn global add fe-conf
+yarn global add @doremijs/fe-conf
 # 然后进行配置生成
 fe-conf
 # 或者跳过全局安装直接使用
-npx fe-conf
+pnpx @doremijs/fe-conf
+npx @doremijs/fe-conf
 ```
 
 ## 生成的配置

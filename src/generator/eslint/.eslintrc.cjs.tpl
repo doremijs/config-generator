@@ -25,7 +25,7 @@ module.exports = {
     'plugin:prettier/recommended'<% } %><% if (react) { %>,
     'plugin:react/jsx-runtime',
     'plugin:react/recommended',
-    'plugin:react-hooks/recommended'
+    'plugin:react-hooks/recommended',
     'plugin:jsx-a11y/recommended'<% } %><% if (vue) { %>,
     'plugin:vue/vue3-recommended'<% } %>
   ],
