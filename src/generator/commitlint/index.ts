@@ -27,7 +27,7 @@ const CommitlintGenerator: ConfigGenerator = {
 
   async generateConfig(): Promise<boolean> {
     return (
-      (await generateFromTemplateFile(join(__dirname, '.commitlintrc.js'))) &&
+      (await generateFromTemplateFile(join(__dirname, '.commitlintrc.cjs'))) &&
       (await generateFromTemplateFile(join(__dirname, 'commit-msg'), {
         folderPath: '.husky'
       }))

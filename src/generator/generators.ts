@@ -21,7 +21,7 @@ import ReactGenerator from './react'
 import VueGenerator from './vue'
 
 export const availableConfigs = {
-  babel: BabelGenerator,
+  // babel: BabelGenerator,
   browserslist: BrowserslistGenerator,
   commitlint: CommitlintGenerator,
   devmoji: DevmojiGenerator,
@@ -40,8 +40,8 @@ export const availableConfigs = {
   vue: VueGenerator,
   readme: ReadmeGenerator,
   stylelint: StylelintGenerator,
-  typescript: TypescriptGenerator,
-  a2s: A2SGenerator
+  typescript: TypescriptGenerator
+  // a2s: A2SGenerator
 } as const
 
 export type AvailableConfigs = typeof availableConfigs
