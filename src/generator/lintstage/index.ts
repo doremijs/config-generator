@@ -4,6 +4,7 @@ import {
   commonConfigExisted,
   configInPackageJSON
 } from '../../utils'
+import { AvailableConfigKeys } from '../generators'
 import { ConfigGenerator } from '../interface'
 
 const LintStagedGenerator: ConfigGenerator = {
@@ -12,7 +13,8 @@ const LintStagedGenerator: ConfigGenerator = {
     default: true,
     front: true,
     full: true,
-    node: true
+    node: true,
+    modern: true
   },
   desc:
     "Run linters against staged git files and don't let 💩 slip into your code base!",
@@ -26,9 +28,21 @@ const LintStagedGenerator: ConfigGenerator = {
     )
   },
 
-  async generateConfig(): Promise<boolean> {
+  async generateConfig(
+    selectedConfigKeys: AvailableConfigKeys[]
+  ): Promise<boolean> {
     return (
-      (await generateFromTemplateFile(join(__dirname, '.lintstagedrc.js'))) &&
+      (await generateFromTemplateFile(
+        join(__dirname, '.lintstagedrc.cjs.tpl'),
+        {
+          interpolationValues: {
+            prettier: selectedConfigKeys.includes('prettier'),
+            eslint: selectedConfigKeys.includes('eslint'),
+            oxlint: selectedConfigKeys.includes('oxlint'),
+            biome: selectedConfigKeys.includes('biome')
+          }
+        }
+      )) &&
       (await generateFromTemplateFile(join(__dirname, 'pre-commit'), {
         folderPath: '.husky'
       }))

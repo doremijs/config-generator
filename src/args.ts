@@ -67,7 +67,7 @@ flags的值如下：
     }
     // 模板
     if (['-t', '--template'].includes(args[0])) {
-      if (['default', 'front', 'node', 'full'].includes(args[1])) {
+      if (['default', 'front', 'node', 'full', 'modern'].includes(args[1])) {
         return {
           template: args[1] as TemplateKeys
         }

@@ -11,10 +11,11 @@ import { ConfigGenerator } from '../interface'
 const PrettierGenerator: ConfigGenerator = {
   key: 'prettier',
   select: {
-    default: true,
-    front: true,
-    full: true,
-    node: true
+    default: false,
+    front: false,
+    full: false,
+    node: false,
+    modern: false
   },
   desc: 'An opinionated code formatter',
   refUrl: 'https://prettier.io/docs/en/configuration.html',

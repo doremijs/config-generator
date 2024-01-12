@@ -6,7 +6,8 @@ const VueGenerator: ConfigGenerator = {
     default: false,
     front: false,
     full: false,
-    node: false
+    node: false,
+    modern: false
   },
   desc: 'This is a Vue project',
 

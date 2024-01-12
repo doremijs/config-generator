@@ -1,5 +1,5 @@
 // import { join } from 'path'
-import { copyFile, writeFile, readFileSync } from 'fs'
+import { copyFile, writeFile, readFileSync, existsSync } from 'fs'
 import { ensureDir } from 'fs-extra'
 import { join, parse } from 'path'
 import { promisify } from 'util'
@@ -26,6 +26,13 @@ interface ArgOption {
  */
 export function loadOption<T extends ArgOption>(defaultOpt: T, opt?: T): T {
   return { ...defaultOpt, ...(opt || {}) }
+}
+
+/**
+ * 文件是否存在
+ */
+export async function fileExisted(filePath: string) {
+  return existsSync(filePath)
 }
 
 /**

@@ -17,6 +17,8 @@ export interface Generator {
     node?: boolean
     // 全栈模板模式
     full?: boolean
+    // 现代化模板模式
+    modern?: boolean
   }
   // 当前配置的简单描述
   desc: string

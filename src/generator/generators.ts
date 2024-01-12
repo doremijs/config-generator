@@ -1,4 +1,5 @@
-import BabelGenerator from './babel'
+// import BabelGenerator from './babel'
+import BiomeGenerator from './biome'
 import BrowserslistGenerator from './browserslist'
 import CommitlintGenerator from './commitlint'
 import DevmojiGenerator from './devmoji'
@@ -12,16 +13,18 @@ import LicenseGenerator from './license'
 import LintStagedGenerator from './lintstage'
 import NpmGenerator from './npm'
 import NvmGenerator from './nvm'
+import OxlintGenerator from './oxlint'
 import PrettierGenerator from './prettier'
 import ReadmeGenerator from './readme'
 import StylelintGenerator from './stylelint'
 import TypescriptGenerator from './typescript'
-import A2SGenerator from './a2s'
+// import A2SGenerator from './a2s'
 import ReactGenerator from './react'
 import VueGenerator from './vue'
 
 export const availableConfigs = {
   // babel: BabelGenerator,
+  biome: BiomeGenerator,
   browserslist: BrowserslistGenerator,
   commitlint: CommitlintGenerator,
   devmoji: DevmojiGenerator,
@@ -35,6 +38,7 @@ export const availableConfigs = {
   lintstaged: LintStagedGenerator,
   npm: NpmGenerator,
   nvm: NvmGenerator,
+  oxlint: OxlintGenerator,
   prettier: PrettierGenerator,
   react: ReactGenerator,
   vue: VueGenerator,

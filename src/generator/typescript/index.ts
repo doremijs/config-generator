@@ -8,7 +8,8 @@ const TypescriptGenerator: ConfigGenerator = {
     default: true,
     front: true,
     full: true,
-    node: true
+    node: true,
+    modern: true
   },
   desc: "Javascript's superset with type safe",
   refUrl: 'https://www.typescriptlang.org/tsconfig',

@@ -8,7 +8,8 @@ const ReadmeGenerator: ConfigGenerator = {
     default: true,
     front: true,
     full: true,
-    node: true
+    node: true,
+    modern: true
   },
   desc: 'Tell others about your project',
   echoAfter: '你可能需要更改 README 文件中的内容。',

@@ -11,10 +11,11 @@ import { ConfigGenerator } from '../interface'
 const EslintGenerator: ConfigGenerator = {
   key: 'eslint',
   select: {
-    default: true,
-    front: true,
-    full: true,
-    node: true
+    default: false,
+    front: false,
+    full: false,
+    node: false,
+    modern: false
   },
   desc: 'Find and fix problems in your JS/TS code',
   refUrl: [

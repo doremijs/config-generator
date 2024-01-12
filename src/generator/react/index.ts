@@ -4,9 +4,10 @@ const ReactGenerator: ConfigGenerator = {
   key: 'react',
   select: {
     default: false,
-    front: false,
+    front: true,
     full: false,
-    node: false
+    node: false,
+    modern: false
   },
   desc: 'This is a React project',
 
