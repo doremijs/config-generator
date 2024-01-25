@@ -24,7 +24,7 @@ const BiomeGenerator: ConfigGenerator = {
       (await updatePkg(
         this.key,
         ['scripts', 'format'],
-        'biome format ./src --write'
+        'biome check --apply .'
       ))
     )
   }

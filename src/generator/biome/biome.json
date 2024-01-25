@@ -1,24 +1,7 @@
 {
-	"$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
-	"files": {
-		"include": ["src/**/*.ts", "tests/**/*.ts"]
-	},
-	"formatter": {
-		"enabled": true,
-		"indentStyle": "space",
-		"indentWidth": 2,
-		"lineEnding": "lf",
-		"lineWidth": 120
-	},
-	"javascript": {
-		"formatter": {
-			"enabled": true,
-			"quoteStyle": "single",
-			"jsxQuoteStyle": "double",
-			"semicolons": "asNeeded",
-			"trailingComma": "none",
-			"bracketSpacing": true,
-			"bracketSameLine": false
-		}
-	}
+  "$schema": "https://biomejs.dev/schemas/1.5.2/schema.json",
+  "extends": ["./node_modules/@doremijs/biome-config/biome.json"],
+  "files": {
+    "ignore": ["src/api/models.ts", "src/api/client.ts"]
+  }
 }
