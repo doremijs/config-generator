@@ -1,6 +1,6 @@
-import { join } from 'path'
-import { globExisted, generateFromTemplateFile } from '../../utils'
-import { ConfigGenerator } from '../interface'
+import { join } from 'node:path'
+import { generateFromTemplateFile, globExisted } from '../../utils'
+import type { ConfigGenerator } from '../interface'
 
 const EditorconfigGenerator: ConfigGenerator = {
   key: 'editorconfig',
@@ -10,16 +10,15 @@ const EditorconfigGenerator: ConfigGenerator = {
     full: true,
     node: true
   },
-  desc:
-    'Helps maintain consistent coding styles for multiple developers working on the same project across various editors and IDEs',
+  desc: 'Helps maintain consistent coding styles for multiple developers working on the same project across various editors and IDEs',
   refUrl: 'https://editorconfig.org/',
   file: '.editorconfig',
   checkExist(): Promise<boolean> {
-    return globExisted(this.file!)
+    return globExisted(this.file)
   },
 
   async generateConfig(): Promise<boolean> {
-    return generateFromTemplateFile(join(__dirname, this.file!))
+    return generateFromTemplateFile(join(__dirname, this.file as string))
   }
 }
 

@@ -1,6 +1,6 @@
-import { join } from 'path'
-import { globExisted, generateFromTemplateFile } from '../../utils'
-import { ConfigGenerator } from '../interface'
+import { join } from 'node:path'
+import { generateFromTemplateFile, globExisted } from '../../utils'
+import type { ConfigGenerator } from '../interface'
 
 const NpmGenerator: ConfigGenerator = {
   key: 'npm',
@@ -8,7 +8,7 @@ const NpmGenerator: ConfigGenerator = {
   refUrl: 'https://docs.npmjs.com/cli/v7/configuring-npm/npmrc/',
   file: '.npmrc',
   checkExist(): Promise<boolean> {
-    return globExisted(this.file!)
+    return globExisted(this.file)
   },
 
   async generateConfig(): Promise<boolean> {

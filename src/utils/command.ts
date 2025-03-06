@@ -1,4 +1,4 @@
-import { spawn } from 'child_process'
+import { spawn } from 'node:child_process'
 
 export function runCommand(command: string): Promise<boolean> {
   return new Promise(resolve => {
@@ -14,11 +14,7 @@ export function runCommand(command: string): Promise<boolean> {
   })
 }
 
-export function getDepInstallCommand(
-  packageManager: string | null,
-  deps: string[],
-  isDev = true
-) {
+export function getDepInstallCommand(packageManager: string | null, deps: string[], isDev = true) {
   return `${packageManager || 'npm'} ${
     packageManager === 'yarn' ? 'add' : 'install'
   }${isDev ? ' -D' : ''} ${deps.join(' ')}`

@@ -20,22 +20,28 @@ npx @doremijs/fe-conf
 
 ## 生成的配置
 
-- `babel`
+- ~~`a2s`~~
+- ~~`babel`~~
+- `biome`
 - `browserslist`
 - `commitlint`
 - `devmoji`
-- `dockerignore`
+- `docker`
 - `editorconfig`
 - `eslint`
 - `git`
 - `husky`
+- `igit`
 - `jest`
 - `license`
 - `lintstaged`
 - `npm`
 - `nvm`
+- `o2t`
+- `oxlint`
 - `prettier`
+- `react`
 - `readme`
 - `stylelint`
 - `typescript`
-- `a2s`
+- `vue`

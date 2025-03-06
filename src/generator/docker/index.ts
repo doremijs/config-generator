@@ -1,6 +1,6 @@
-import { join } from 'path'
-import { globExisted, generateFromTemplateFile } from '../../utils'
-import { ConfigGenerator } from '../interface'
+import { join } from 'node:path'
+import { generateFromTemplateFile, globExisted } from '../../utils'
+import type { ConfigGenerator } from '../interface'
 
 const DockerGenerator: ConfigGenerator = {
   key: 'docker',
@@ -16,19 +16,17 @@ const DockerGenerator: ConfigGenerator = {
     },
     {
       label: 'Nodejs best practices',
-      url:
-        'https://dev.to/nodepractices/docker-best-practices-with-node-js-4ln4'
+      url: 'https://dev.to/nodepractices/docker-best-practices-with-node-js-4ln4'
     },
     {
       label: 'Frontend best practices',
-      url:
-        'https://vuejs.org/v2/cookbook/dockerize-vuejs-app.html#Real-World-Example'
+      url: 'https://vuejs.org/v2/cookbook/dockerize-vuejs-app.html#Real-World-Example'
     }
   ],
 
   file: '.dockerignore',
   checkExist(): Promise<boolean> {
-    return globExisted(this.file!)
+    return globExisted(this.file)
   },
 
   async generateConfig(): Promise<boolean> {

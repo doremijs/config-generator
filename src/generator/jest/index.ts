@@ -1,7 +1,7 @@
-import { join } from 'path'
+import { join } from 'node:path'
 import { commonConfigExisted, generateFromTemplateFile } from '../../utils'
-import { AvailableConfigKeys } from '../generators'
-import { ConfigGenerator } from '../interface'
+import type { AvailableConfigKeys } from '../generators'
+import type { ConfigGenerator } from '../interface'
 
 const JestGenerator: ConfigGenerator = {
   key: 'jest',

@@ -1,7 +1,7 @@
-import { execSync } from 'child_process'
+import { execSync } from 'node:child_process'
 import prompts = require('prompts')
+import type { TemplateKeys } from './generator/interface'
 import { log } from './utils'
-import { TemplateKeys } from './generator/interface'
 import { isVersionUpdated } from './utils'
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -15,7 +15,7 @@ export async function upgradeValid(skipPrompts = false) {
     encoding: 'utf-8'
   }).trim()
   // stopSpinner()
-  if (isVersionUpdated(currentPkgInfo.version!.trim(), latestVersion)) {
+  if (isVersionUpdated(currentPkgInfo.version.trim(), latestVersion)) {
     log('upgrade', `检测到新版本 ${latestVersion}，请更新本工具`)
     if (!skipPrompts) {
       const { next } = await prompts({
@@ -30,16 +30,13 @@ export async function upgradeValid(skipPrompts = false) {
   return false
 }
 
-export const helpMessage =
-  '本工具仅用于生成项目的初始化配置使用，具体每个项目的一些配置仍然需要单独设置。'
+export const helpMessage = '本工具仅用于生成项目的初始化配置使用，具体每个项目的一些配置仍然需要单独设置。'
 
 /**
  * 命令行参数预解析
  * @param args 命令行参数列表
  */
-export default async function prepareForArgs(
-  args: string[]
-): Promise<
+export default async function prepareForArgs(args: string[]): Promise<
   | boolean
   | {
       template: TemplateKeys
@@ -61,7 +58,7 @@ flags的值如下：
     }
     // 版本信息
     if (['-v', '--version'].includes(args[0])) {
-      log('version', currentPkgInfo.version!)
+      log('version', currentPkgInfo.version)
       await upgradeValid()
       return false
     }

@@ -1,4 +1,4 @@
-import { ConfigGenerator } from '../interface'
+import type { ConfigGenerator } from '../interface'
 
 const VueGenerator: ConfigGenerator = {
   key: 'vue',

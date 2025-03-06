@@ -1,6 +1,6 @@
-import { join } from 'path'
-import { globExisted, generateFromTemplateFile } from '../../utils'
-import { ConfigGenerator } from '../interface'
+import { join } from 'node:path'
+import { generateFromTemplateFile, globExisted } from '../../utils'
+import type { ConfigGenerator } from '../interface'
 
 const NvmGenerator: ConfigGenerator = {
   key: 'nvm',
@@ -8,11 +8,11 @@ const NvmGenerator: ConfigGenerator = {
   refUrl: 'https://github.com/nvm-sh/nvm#nvmrc',
   file: '.nvmrc',
   checkExist(): Promise<boolean> {
-    return globExisted(this.file!)
+    return globExisted(this.file)
   },
 
   async generateConfig(): Promise<boolean> {
-    return generateFromTemplateFile(join(__dirname, this.file!))
+    return generateFromTemplateFile(join(__dirname, this.file as string))
   }
 }
 

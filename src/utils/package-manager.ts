@@ -1,7 +1,7 @@
-import { execFileSync } from 'child_process'
+import { execFileSync } from 'node:child_process'
 import { globExisted } from './common'
 
-export type PackageManager = 'pnpm' | 'yarn' | 'npm'
+export type PackageManager = 'bun' | 'pnpm' | 'yarn' | 'npm'
 
 /**
  * 获取当前位置所使用的包管理工具
@@ -9,6 +9,9 @@ export type PackageManager = 'pnpm' | 'yarn' | 'npm'
  * 优先级B： pnpm -> yarn -> npm
  */
 export async function getPackageManager(): Promise<PackageManager | null> {
+  if (await globExisted('bun.lock')) {
+    return 'bun'
+  }
   if (await globExisted('pnpm-local.yaml')) {
     return 'pnpm'
   }

@@ -1,12 +1,7 @@
-import { join } from 'path'
-import {
-  commonConfigExisted,
-  configInPackageJSON,
-  generateFromTemplateFile,
-  globExisted
-} from '../../utils'
-import { AvailableConfigKeys } from '../generators'
-import { ConfigGenerator } from '../interface'
+import { join } from 'node:path'
+import { commonConfigExisted, configInPackageJSON, generateFromTemplateFile, globExisted } from '../../utils'
+import type { AvailableConfigKeys } from '../generators'
+import type { ConfigGenerator } from '../interface'
 
 const BabelGenerator: ConfigGenerator = {
   key: 'babel',
@@ -42,9 +37,7 @@ const BabelGenerator: ConfigGenerator = {
     )
   },
 
-  async generateConfig(
-    selectedConfigKeys: AvailableConfigKeys[]
-  ): Promise<boolean> {
+  async generateConfig(selectedConfigKeys: AvailableConfigKeys[]): Promise<boolean> {
     return generateFromTemplateFile(join(__dirname, '.babelrc.js.tpl'), {
       interpolationValues: {
         typescript: selectedConfigKeys.includes('typescript')

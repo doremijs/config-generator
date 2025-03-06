@@ -1,12 +1,6 @@
-import { join } from 'path'
-import {
-  commonConfigExisted,
-  configInPackageJSON,
-  generateFromTemplateFile,
-  globExisted,
-  updatePkg
-} from '../../utils'
-import { ConfigGenerator } from '../interface'
+import { join } from 'node:path'
+import { commonConfigExisted, configInPackageJSON, generateFromTemplateFile, globExisted, updatePkg } from '../../utils'
+import type { ConfigGenerator } from '../interface'
 
 const PrettierGenerator: ConfigGenerator = {
   key: 'prettier',

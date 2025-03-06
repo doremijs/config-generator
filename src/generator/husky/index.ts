@@ -1,5 +1,5 @@
 import { updatePkg } from '../../utils'
-import { ConfigGenerator } from '../interface'
+import type { ConfigGenerator } from '../interface'
 
 const HuskyGenerator: ConfigGenerator = {
   key: 'husky',

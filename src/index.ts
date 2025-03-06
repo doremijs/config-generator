@@ -1,13 +1,13 @@
-import { execSync } from 'child_process'
-import prompts = require('prompts')
+import { execSync } from 'node:child_process'
+import { readFileSync, writeFileSync } from 'node:fs'
+import { join } from 'node:path'
 import { sync } from 'fast-glob'
-import { join } from 'path'
-import { readFileSync, writeFileSync } from 'fs'
-import runGenerator from './generator'
-import { AvailableConfigKeys, availableConfigs } from './generator/generators'
-import { log, sleep } from './utils'
+import prompts from 'prompts'
 import prepareForArgs, { helpMessage, upgradeValid } from './args'
-import { TemplateKeys } from './generator/interface'
+import runGenerator from './generator'
+import { type AvailableConfigKeys, availableConfigs } from './generator/generators'
+import type { TemplateKeys } from './generator/interface'
+import { log, sleep } from './utils'
 
 export async function run(args: string[]) {
   // 命令行参数解析
@@ -18,7 +18,7 @@ export async function run(args: string[]) {
     return
   }
   // 弹框选择
-  await sleep(1000)
+  await sleep(100)
   try {
     const { selected } = await prompts([
       {

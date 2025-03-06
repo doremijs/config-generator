@@ -1,6 +1,6 @@
-import { join } from 'path'
-import { globExisted, generateFromTemplateFile } from '../../utils'
-import { ConfigGenerator } from '../interface'
+import { join } from 'node:path'
+import { generateFromTemplateFile, globExisted } from '../../utils'
+import type { ConfigGenerator } from '../interface'
 
 const DevmojiGenerator: ConfigGenerator = {
   key: 'devmoji',

@@ -1,6 +1,6 @@
-import { join } from 'path'
-import { generateFromTemplateFile, commonConfigExisted } from '../../utils'
-import { ConfigGenerator } from '../interface'
+import { join } from 'node:path'
+import { commonConfigExisted, generateFromTemplateFile } from '../../utils'
+import type { ConfigGenerator } from '../interface'
 
 const TypescriptGenerator: ConfigGenerator = {
   key: 'typescript',

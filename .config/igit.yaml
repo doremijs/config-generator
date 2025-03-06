@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=https://igit.erguotou.me/schema/0.0.2/schema.json
+staged_hooks:
+  enabled: true
+  rules:
+    '**/*.{css,scss,less,styl,stylus}': stylelint --fix
+    '**/*.{js,jsx,ts,tsx}': biome check --write
+commit_msg:
+  enabled: true
+  prependEmoji: true

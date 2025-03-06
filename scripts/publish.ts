@@ -1,5 +1,5 @@
-import { copyFileSync, readFileSync, unlinkSync, writeFileSync } from 'fs'
-import { join } from 'path'
+import { copyFileSync, readFileSync, unlinkSync, writeFileSync } from 'node:fs'
+import { join } from 'node:path'
 import { ensureFileSync } from 'fs-extra'
 // import copyTemplates from './copy'
 

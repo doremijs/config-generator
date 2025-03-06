@@ -1,13 +1,13 @@
-// import { join } from 'path'
-import { copyFile, writeFile, readFileSync, existsSync } from 'fs'
-import { ensureDir } from 'fs-extra'
-import { join, parse } from 'path'
-import { promisify } from 'util'
+// import { join } from 'node:path'
+import { copyFile, existsSync, readFileSync, writeFile } from 'node:fs'
+import { join, parse } from 'node:path'
+import { promisify } from 'node:util'
 import { renderFile } from 'ejs'
+import { ensureDir } from 'fs-extra'
 import { sortPackageJson } from 'sort-package-json'
 import glob = require('fast-glob')
 
-import { ColorEnum, colorful } from './color'
+import { type ColorEnum, colorful } from './color'
 
 interface PackageJson {
   [key: string]: any
@@ -40,7 +40,10 @@ export async function fileExisted(filePath: string) {
  * @param globString glob字符串
  * @returns 对应的glob是否有匹配的文件
  */
-export async function globExisted(globString: string) {
+export async function globExisted(globString?: string) {
+  if (!globString) {
+    return false
+  }
   const files = await glob(globString, { dot: true, cwd: process.cwd() })
   return files.length > 0
 }
@@ -51,10 +54,8 @@ export async function globExisted(globString: string) {
  * @param name 配置名称
  * @returns 是否有配置文件存在
  */
-export async function commonConfigExisted(name: string) {
-  return globExisted(
-    `?(.)${name}?(rc)?(.config)?({.js,.ts,.cjs,.json,.y?(a)ml})`
-  )
+export async function commonConfigExisted(name?: string) {
+  return globExisted(`?(.)${name}?(rc)?(.config)?({.js,.ts,.cjs,.json,.y?(a)ml})`)
 }
 
 /**
@@ -69,10 +70,7 @@ export function getPkgInfo() {
         })
       ) as PackageJson
     } catch (error) {
-      log(
-        'package',
-        `读取 package.json 文件失败，请检查该文件是否存在且格式正确。`
-      )
+      log('package', '读取 package.json 文件失败，请检查该文件是否存在且格式正确。')
       //
     }
   }
@@ -85,11 +83,7 @@ export function getPkgInfo() {
  * @param keys 要更新的字段路径数组
  * @param value 要更新的值
  */
-export async function updatePkg(
-  _module: string,
-  keys: string[],
-  value: unknown
-) {
+export async function updatePkg(_module: string, keys: string[], value: unknown) {
   let obj = getPkgInfo()
   if (obj) {
     for (const [index, key] of keys.entries()) {
@@ -103,19 +97,10 @@ export async function updatePkg(
       }
     }
     const targetJSON = sortPackageJson(pkg!)
-    await promisify(writeFile)(
-      join(process.cwd(), 'package.json'),
-      JSON.stringify(targetJSON, null, 2)
-    )
+    await promisify(writeFile)(join(process.cwd(), 'package.json'), JSON.stringify(targetJSON, null, 2))
     return true
-  } else {
-    log(
-      _module,
-      `更新 package.json 内容失败，你可以手动修改"${keys.join(
-        '.'
-      )}"的值为"${value}"。`
-    )
   }
+  log(_module, `更新 package.json 内容失败，你可以手动修改"${keys.join('.')}"的值为"${value}"。`)
   return false
 }
 
@@ -140,23 +125,13 @@ export interface GenerateOption extends ArgOption {
  * @param templateFilePath 模板文件路径
  * @returns 是否成功
  */
-export async function generateFromTemplateFile(
-  templateFilePath: string,
-  opt?: GenerateOption
-): Promise<boolean> {
-  const { folderPath, interpolationValues } = loadOption<GenerateOption>(
-    {},
-    opt
-  )
+export async function generateFromTemplateFile(templateFilePath: string, opt?: GenerateOption): Promise<boolean> {
+  const { folderPath, interpolationValues } = loadOption<GenerateOption>({}, opt)
   try {
     if (folderPath) {
       await ensureDir(join(process.cwd(), folderPath))
     }
-    const targetFilePath = join(
-      process.cwd(),
-      folderPath ?? '',
-      parse(templateFilePath).base
-    ).replace(/\.tpl$/, '')
+    const targetFilePath = join(process.cwd(), folderPath ?? '', parse(templateFilePath).base).replace(/\.tpl$/, '')
     if (!interpolationValues) {
       await promisify(copyFile)(templateFilePath, targetFilePath)
     } else {
@@ -187,15 +162,9 @@ export interface LogOption extends ArgOption {
  * @param opt 参数
  */
 export function log(name: string, content: string, opt?: LogOption) {
-  const option: LogOption = loadOption<LogOption>(
-    { error: false, nameColor: 'FgCyan' },
-    opt
-  )
+  const option: LogOption = loadOption<LogOption>({ error: false, nameColor: 'FgCyan' }, opt)
   console.log(
-    `${colorful(
-      `[${name[0].toUpperCase()}${name.slice(1)}]:`,
-      option.error ? 'FgRed' : option.nameColor!
-    )} ${content}`
+    `${colorful(`[${name[0].toUpperCase()}${name.slice(1)}]:`, option.error ? 'FgRed' : option.nameColor!)} ${content}`
   )
 }
 

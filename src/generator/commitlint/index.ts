@@ -1,10 +1,6 @@
-import { join } from 'path'
-import {
-  commonConfigExisted,
-  configInPackageJSON,
-  generateFromTemplateFile
-} from '../../utils'
-import { ConfigGenerator } from '../interface'
+import { join } from 'node:path'
+import { commonConfigExisted, configInPackageJSON, generateFromTemplateFile } from '../../utils'
+import type { ConfigGenerator } from '../interface'
 
 const CommitlintGenerator: ConfigGenerator = {
   key: 'commitlint',
@@ -19,10 +15,7 @@ const CommitlintGenerator: ConfigGenerator = {
   devDependencies: ['@commitlint/cli', '@commitlint/config-conventional'],
 
   async checkExist(): Promise<boolean> {
-    return (
-      (await commonConfigExisted('commitlint')) ||
-      configInPackageJSON(['commitlint'])
-    )
+    return (await commonConfigExisted('commitlint')) || configInPackageJSON(['commitlint'])
   },
 
   async generateConfig(): Promise<boolean> {

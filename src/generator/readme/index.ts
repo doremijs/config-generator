@@ -1,6 +1,6 @@
-import { join } from 'path'
-import { globExisted, generateFromTemplateFile, getPkgInfo } from '../../utils'
-import { ConfigGenerator } from '../interface'
+import { join } from 'node:path'
+import { generateFromTemplateFile, getPkgInfo, globExisted } from '../../utils'
+import type { ConfigGenerator } from '../interface'
 
 const ReadmeGenerator: ConfigGenerator = {
   key: 'readme',

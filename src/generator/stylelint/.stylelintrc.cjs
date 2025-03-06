@@ -3,7 +3,5 @@
  * @link https://stylelint.io/user-guide/configure
  */
 module.exports = {
-  extends: [
-    '@doremijs/stylelint-config'
-  ]
+  extends: ['@doremijs/stylelint-config']
 }

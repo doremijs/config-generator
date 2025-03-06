@@ -1,13 +1,7 @@
-import {
-  colorful,
-  getDepInstallCommand,
-  log,
-  runCommand,
-  updatePkg
-} from '../utils'
+import { colorful, getDepInstallCommand, log, runCommand, updatePkg } from '../utils'
 
 import { getPackageManager } from '../utils'
-import { availableConfigs, AvailableConfigKeys } from './generators'
+import { type AvailableConfigKeys, availableConfigs } from './generators'
 
 export default async function run(selectedConfigKeys: AvailableConfigKeys[]) {
   let generated = 0
@@ -68,11 +62,7 @@ export default async function run(selectedConfigKeys: AvailableConfigKeys[]) {
     }
   }
   // 添加lint:all命令
-  if (
-    selectedConfigKeys.some(key =>
-      ['eslint', 'prettier', 'stylelint'].includes(key)
-    )
-  ) {
+  if (selectedConfigKeys.some(key => ['eslint', 'prettier', 'stylelint', 'biome'].includes(key))) {
     const lintScripts = []
     if (selectedConfigKeys.includes('eslint')) {
       lintScripts.push('npm run eslint')
@@ -82,6 +72,9 @@ export default async function run(selectedConfigKeys: AvailableConfigKeys[]) {
     }
     if (selectedConfigKeys.includes('prettier')) {
       lintScripts.push('npm run prettier')
+    }
+    if (selectedConfigKeys.includes('biome')) {
+      lintScripts.push('npm run format')
     }
     await updatePkg('global', ['scripts', 'lint:all'], lintScripts.join(' && '))
   }
@@ -102,7 +95,7 @@ export default async function run(selectedConfigKeys: AvailableConfigKeys[]) {
     if (!packageManager) {
       const _commands = commands.join('\n')
       log(
-        `install`,
+        'install',
         `建议使用 pnpm 或 yarn 进行包管理，不建议使用 npm 进行包管理，如需安装请执行 npm i -g pnpm/yarn，并在安装后执行\n${_commands.replace(
           /^npm/g,
           'pnpm/yarn'
@@ -130,9 +123,7 @@ export default async function run(selectedConfigKeys: AvailableConfigKeys[]) {
   }
   return log(
     'Done',
-    generated > 0
-      ? `Generated ${generated} module file${generated > 1 ? 's' : ''}.`
-      : 'Nothing to generate.',
+    generated > 0 ? `Generated ${generated} module file${generated > 1 ? 's' : ''}.` : 'Nothing to generate.',
     { nameColor: 'FgGreen' }
   )
 }

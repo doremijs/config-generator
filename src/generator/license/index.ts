@@ -1,12 +1,6 @@
-import { join } from 'path'
-import {
-  globExisted,
-  generateFromTemplateFile,
-  configInPackageJSON,
-  getPkgInfo,
-  updatePkg
-} from '../../utils'
-import { ConfigGenerator } from '../interface'
+import { join } from 'node:path'
+import { configInPackageJSON, generateFromTemplateFile, getPkgInfo, globExisted, updatePkg } from '../../utils'
+import type { ConfigGenerator } from '../interface'
 
 const LicenseGenerator: ConfigGenerator = {
   key: 'license',
@@ -18,8 +12,7 @@ const LicenseGenerator: ConfigGenerator = {
   },
   desc: "Project's license instruction",
   refUrl: 'https://opensource.org/licenses',
-  echoAfter:
-    '你可能需要更改 LICENSE 和 package.json 文件中协议的说明，默认使用 GPL-3.0-or-later 协议。',
+  echoAfter: '你可能需要更改 LICENSE 和 package.json 文件中协议的说明，默认使用 GPL-3.0-or-later 协议。',
 
   async checkExist(): Promise<boolean> {
     return (await globExisted('LICENSE')) || configInPackageJSON(['license'])

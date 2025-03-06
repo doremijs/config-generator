@@ -1,12 +1,7 @@
-import { join } from 'path'
-import {
-  generateFromTemplateFile,
-  commonConfigExisted,
-  configInPackageJSON,
-  updatePkg
-} from '../../utils'
-import { AvailableConfigKeys } from '../generators'
-import { ConfigGenerator } from '../interface'
+import { join } from 'node:path'
+import { commonConfigExisted, configInPackageJSON, generateFromTemplateFile, updatePkg } from '../../utils'
+import type { AvailableConfigKeys } from '../generators'
+import type { ConfigGenerator } from '../interface'
 
 const EslintGenerator: ConfigGenerator = {
   key: 'eslint',
@@ -59,15 +54,10 @@ const EslintGenerator: ConfigGenerator = {
     '你可能需要为 eslint 做个性化设置，必要时需要删除默认生成的配置，参考 https://eslint.org/docs/user-guide/configuring/',
 
   async checkExist(): Promise<boolean> {
-    return (
-      (await commonConfigExisted('eslint')) ||
-      configInPackageJSON(['eslintConfig'])
-    )
+    return (await commonConfigExisted('eslint')) || configInPackageJSON(['eslintConfig'])
   },
 
-  async generateConfig(
-    selectedConfigKeys: AvailableConfigKeys[]
-  ): Promise<boolean> {
+  async generateConfig(selectedConfigKeys: AvailableConfigKeys[]): Promise<boolean> {
     return (
       (await generateFromTemplateFile(join(__dirname, '.eslintignore'))) &&
       (await generateFromTemplateFile(join(__dirname, '.eslintrc.cjs.tpl'), {
@@ -79,11 +69,7 @@ const EslintGenerator: ConfigGenerator = {
           vue: selectedConfigKeys.includes('vue')
         }
       })) &&
-      (await updatePkg(
-        this.key,
-        ['scripts', 'eslint'],
-        'eslint . --ext js,jsx,ts,tsx,json --quiet --fix'
-      ))
+      (await updatePkg(this.key, ['scripts', 'eslint'], 'eslint . --ext js,jsx,ts,tsx,json --quiet --fix'))
     )
   }
 }

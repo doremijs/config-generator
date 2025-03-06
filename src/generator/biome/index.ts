@@ -1,6 +1,6 @@
-import { join } from 'path'
+import { join } from 'node:path'
 import { fileExisted, generateFromTemplateFile, updatePkg } from '../../utils'
-import { ConfigGenerator } from '../interface'
+import type { ConfigGenerator } from '../interface'
 
 const BiomeGenerator: ConfigGenerator = {
   key: 'biome',
@@ -21,11 +21,7 @@ const BiomeGenerator: ConfigGenerator = {
   async generateConfig(): Promise<boolean> {
     return (
       (await generateFromTemplateFile(join(__dirname, 'biome.json'))) &&
-      (await updatePkg(
-        this.key,
-        ['scripts', 'format'],
-        'biome check --write .'
-      ))
+      (await updatePkg(this.key, ['scripts', 'format'], 'biome check --write .'))
     )
   }
 }

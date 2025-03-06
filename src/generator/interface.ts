@@ -1,8 +1,6 @@
-import { AvailableConfigKeys } from './generators'
+import type { AvailableConfigKeys } from './generators'
 
-export type DependenciesFromFunction = (
-  selectedConfigKeys: AvailableConfigKeys[]
-) => string[]
+export type DependenciesFromFunction = (selectedConfigKeys: AvailableConfigKeys[]) => string[]
 
 export interface Generator {
   // 记录日志用

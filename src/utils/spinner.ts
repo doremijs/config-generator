@@ -6,12 +6,7 @@ export function showSpinner(str?: string) {
   let charIndex = 0
   function loading() {
     timeout = setTimeout(() => {
-      process.stdout.write(
-        '\r' +
-          colorful(chars[charIndex % chars.length], 'FgBlue') +
-          ' ' +
-          (str ?? '')
-      )
+      process.stdout.write(`\r${colorful(chars[charIndex % chars.length], 'FgBlue')} ${str ?? ''}`)
       charIndex++
       loading()
     }, 100)
