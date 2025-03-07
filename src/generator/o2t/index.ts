@@ -22,8 +22,7 @@ const O2TGenerator: ConfigGenerator = {
 
   async generateConfig(): Promise<boolean> {
     return (
-      await generateFromTemplateFile(join(__dirname, this.file as string))
-      &&
+      (await generateFromTemplateFile(join(__dirname, this.file as string))) &&
       (await updatePkg(this.key, ['scripts', 'gen:sdk'], 'o2t generate typescript'))
     )
   }

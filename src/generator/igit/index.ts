@@ -21,11 +21,9 @@ const iGitGenerator: ConfigGenerator = {
   execAfter: 'npx igit install',
   async generateConfig(): Promise<boolean> {
     return (
-      await generateFromTemplateFile(join(__dirname, this.file as string), {
+      (await generateFromTemplateFile(join(__dirname, this.file as string), {
         folderPath: '.config'
-      })
-      &&
-      (await updatePkg(this.key, ['scripts', 'postinstall'], 'igit install'))
+      })) && (await updatePkg(this.key, ['scripts', 'postinstall'], 'igit install'))
     )
   }
 }
