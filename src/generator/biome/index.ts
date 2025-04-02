@@ -13,7 +13,7 @@ const BiomeGenerator: ConfigGenerator = {
   },
   desc: 'Format, lint, and more in a fraction of a second, write in Rust',
   refUrl: 'https://biomejs.dev/',
-  devDependencies: ['@biomejs/biome'],
+  devDependencies: ['@biomejs/biome', '@doremijs/biome-config'],
   async checkExist(): Promise<boolean> {
     return await fileExisted('biome.json')
   },
