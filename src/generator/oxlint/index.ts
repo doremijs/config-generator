@@ -8,7 +8,7 @@ const OxlintGenerator: ConfigGenerator = {
     front: true,
     full: true,
     node: true,
-    modern: true
+    modern: false
   },
   desc: 'A collection of JavaScript tools written in Rust',
   refUrl: [

@@ -6,7 +6,8 @@ const DockerGenerator: ConfigGenerator = {
   key: 'docker',
   select: {
     node: true,
-    full: true
+    full: true,
+    modern: true
   },
   desc: 'Accelerate how you build, share and run modern applications',
   refUrl: [

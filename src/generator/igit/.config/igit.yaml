@@ -3,7 +3,7 @@ staged_hooks:
   enabled: true
   rules:
     '**/*.{js,jsx,ts,tsx}': biome check --write
-    '**/*.{css,scss,less,styl,stylus}': stylelint --fix
+    # '**/*.{css,scss,less,styl,stylus}': stylelint --fix
 commit_msg:
   enabled: true
   prependEmoji: true

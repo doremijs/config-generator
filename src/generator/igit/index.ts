@@ -8,7 +8,8 @@ const iGitGenerator: ConfigGenerator = {
     default: true,
     front: true,
     full: true,
-    node: true
+    node: true,
+    modern: true
   },
   desc: 'A combined git hook tool',
   file: '.config/igit.yaml',

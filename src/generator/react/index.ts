@@ -7,7 +7,7 @@ const ReactGenerator: ConfigGenerator = {
     front: true,
     full: false,
     node: false,
-    modern: false
+    modern: true
   },
   desc: 'This is a React project',
 

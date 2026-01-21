@@ -6,7 +6,8 @@ const BrowserslistGenerator: ConfigGenerator = {
   key: 'browserslist',
   select: {
     front: true,
-    full: true
+    full: true,
+    modern: true
   },
   desc: 'The config to share target browsers and Node.js versions between different front-end tools',
   refUrl: 'https://github.com/browserslist/browserslist',

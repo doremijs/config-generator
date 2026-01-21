@@ -16,6 +16,13 @@ fe-conf
 # 或者跳过全局安装直接使用
 pnpx @doremijs/fe-conf
 npx @doremijs/fe-conf
+
+# 非交互模式
+# 直接生成指定配置，多个配置用逗号分隔
+npx @doremijs/fe-conf -m biome,browserslist
+
+# 跳过更新检查
+npx @doremijs/fe-conf --skip-update
 ```
 
 ## 生成的配置

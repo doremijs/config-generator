@@ -1,6 +1,6 @@
 {
   "name": "@doremijs/fe-conf",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "基础的前端项目配置生成器，适合项目初始化的时候使用，或者完善当前项目的配置。生成的配置文件只作为通用设置，具体项目仍然需要做进一步修改以适配项目需要。",
   "homepage": "https://github.com/doremijs/config-generator#readme",
   "bugs": {
@@ -16,7 +16,10 @@
   "bin": {
     "fe-conf": "./bin/main.js"
   },
-  "files": ["bin", "dist"],
+  "files": [
+    "bin",
+    "dist"
+  ],
   "scripts": {
     "build": "rm -rf dist && tsc && npm run copy",
     "copy": "rsync -avzP src/generator dist --exclude=\"index.ts\"",

@@ -10,7 +10,7 @@ const LintStagedGenerator: ConfigGenerator = {
     front: true,
     full: true,
     node: true,
-    modern: true
+    modern: false
   },
   desc: "Run linters against staged git files and don't let 💩 slip into your code base!",
   refUrl: 'https://www.npmjs.com/package/lint-staged',
