@@ -1,8 +1,9 @@
 import { execSync } from 'node:child_process'
+
 import prompts = require('prompts')
+
 import type { TemplateKeys } from './generator/interface'
-import { log } from './utils'
-import { isVersionUpdated } from './utils'
+import { isVersionUpdated, log, type PackageManager } from './utils'
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const currentPkgInfo = require('../package.json')
@@ -45,12 +46,14 @@ export default async function prepareForArgs(args: string[]): Promise<
       template?: TemplateKeys
       modules?: string[]
       skipUpdate?: boolean
+      packageManager?: PackageManager
     }
 > {
   const result: {
     template?: TemplateKeys
     modules?: string[]
     skipUpdate?: boolean
+    packageManager?: PackageManager
   } = {}
 
   if (args.length) {
@@ -64,6 +67,7 @@ flags的值如下：
 -h, --help\t\t打印帮助信息
 -v, --version\t\t打印当前版本
 -t, --template\t\t选择模板，可选值 default: 默认, front: 前端模板, node: NodeJs后端模板, full: 全栈模板
+-pm, --package-manager\t指定包管理工具，可选值 pnpm, yarn, npm, bun
 -m, --modules\t\t非交互模式，直接指定要生成的配置模块，多个模块用逗号分隔，例如：-m biome,browserslist,igit
 --no-interactive\t非交互模式，需要配合 -m 使用
 --skip-update\t\t跳过版本更新检查`
@@ -93,6 +97,17 @@ flags的值如下：
         }
       }
 
+      // 包管理工具
+      if (['-pm', '--package-manager'].includes(arg)) {
+        const pmValue = args[i + 1]
+        if (['pnpm', 'yarn', 'npm', 'bun'].includes(pmValue)) {
+          result.packageManager = pmValue as PackageManager
+          i++ // 跳过下一个参数
+        } else {
+          log('Package Manager Error', '不支持的包管理工具，将自动检测')
+        }
+      }
+
       // 模块选择（非交互模式）
       if (['-m', '--modules'].includes(arg)) {
         const modulesValue = args[i + 1]
@@ -115,9 +130,7 @@ flags的值如下：
     }
   }
 
-  // 如果有任何配置，返回配置对象，否则返回 true 表示继续交互模式（但如果没有 args 其实也会走到这里，需要小心，原逻辑是 args.length > 0 才处理）
-  // 实际上原逻辑是如果 args.length 为 0 返回 true。
-  // Create default result if args exist but didn't match help/version
+  // 如果有任何配置，返回配置对象，否则返回 true 表示继续交互模式
   if (args.length > 0 && Object.keys(result).length > 0) {
     return result
   }

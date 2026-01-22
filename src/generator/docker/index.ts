@@ -24,7 +24,6 @@ const DockerGenerator: ConfigGenerator = {
       url: 'https://vuejs.org/v2/cookbook/dockerize-vuejs-app.html#Real-World-Example'
     }
   ],
-
   file: '.dockerignore',
   checkExist(): Promise<boolean> {
     return globExisted(this.file)

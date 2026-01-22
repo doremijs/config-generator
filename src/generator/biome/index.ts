@@ -20,7 +20,7 @@ const BiomeGenerator: ConfigGenerator = {
 
   async generateConfig(): Promise<boolean> {
     return (
-      (await generateFromTemplateFile(join(__dirname, 'biome.json'))) &&
+      (await generateFromTemplateFile(join(__dirname, 'biome.json.tpl'))) &&
       (await updatePkg(this.key, ['scripts', 'format'], 'biome check --write .'))
     )
   }

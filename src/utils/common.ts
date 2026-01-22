@@ -5,6 +5,7 @@ import { promisify } from 'node:util'
 import { renderFile } from 'ejs'
 import { ensureDir } from 'fs-extra'
 import { sortPackageJson } from 'sort-package-json'
+
 import glob = require('fast-glob')
 
 import { type ColorEnum, colorful } from './color'

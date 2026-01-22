@@ -7,7 +7,7 @@ import prepareForArgs, { helpMessage, upgradeValid } from './args'
 import runGenerator from './generator'
 import { type AvailableConfigKeys, availableConfigs } from './generator/generators'
 import type { TemplateKeys } from './generator/interface'
-import { log, sleep } from './utils'
+import { log, type PackageManager, sleep } from './utils'
 
 export async function run(args: string[]) {
   // 命令行参数解析
@@ -16,10 +16,11 @@ export async function run(args: string[]) {
   log('Help', helpMessage)
 
   const prepareObj = typeof prepare === 'object' ? prepare : {}
-  const { skipUpdate, modules, template } = prepareObj as {
+  const { skipUpdate, modules, template, packageManager } = prepareObj as {
     template?: TemplateKeys
     modules?: string[]
     skipUpdate?: boolean
+    packageManager?: PackageManager
   }
 
   if (await upgradeValid(false, skipUpdate)) {
@@ -82,7 +83,7 @@ export async function run(args: string[]) {
       log('git', '已为您自动初始化 git 仓库')
       execSync('git init', { cwd })
     }
-    runGenerator(selectedModules as AvailableConfigKeys[])
+    runGenerator(selectedModules as AvailableConfigKeys[], packageManager)
   } else {
     log('Done', 'Nothing to generate.', { error: true })
   }

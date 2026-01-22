@@ -1,9 +1,15 @@
-import { colorful, getDepInstallCommand, log, runCommand, updatePkg } from '../utils'
-
-import { getPackageManager } from '../utils'
+import {
+  colorful,
+  getDepInstallCommand,
+  getPackageManager,
+  log,
+  type PackageManager,
+  runCommand,
+  updatePkg
+} from '../utils'
 import { type AvailableConfigKeys, availableConfigs } from './generators'
 
-export default async function run(selectedConfigKeys: AvailableConfigKeys[]) {
+export default async function run(selectedConfigKeys: AvailableConfigKeys[], userPackageManager?: PackageManager) {
   let generated = 0
   const dependencies: string[] = []
   const devDependencies: string[] = []
@@ -84,7 +90,7 @@ export default async function run(selectedConfigKeys: AvailableConfigKeys[]) {
   console.table(refUrls)
   // 安装依赖
   if (dependencies.length || devDependencies.length) {
-    const packageManager = await getPackageManager()
+    const packageManager = userPackageManager || (await getPackageManager())
     const commands = []
     if (dependencies.length) {
       commands.push(getDepInstallCommand(packageManager, dependencies, false))
