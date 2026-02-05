@@ -4,8 +4,6 @@
     "./node_modules/@doremijs/biome-config/biome.json"
   ],
   "files": {
-    "includes": [
-      "!**/src/api/schema.ts"
-    ]
+    "includes": ["!**/src/api/schema.ts", "!**/{.claude,.agent}/**/*"]
   }
 }

@@ -8,7 +8,7 @@ commit_msg:
   enabled: true
   prependEmoji: true
 ai:
-  enabled: true
+  enabled: false
   baseUrl: https://api.deepseek.com
   # apiKey:
   model: deepseek-chat
